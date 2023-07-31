@@ -1,0 +1,36 @@
+---
+
+# tasks file for nginx install
+- debug:
+    msg: "Launch nginx installation"
+  run_once: true
+
+- name: "Install EPEL package CentOS hosts"
+  yum:
+    name: epel-release
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == 'CentOS'
+  tags:
+    - nginx
+
+- name: "Install nginx package"
+  package:
+    name: nginx
+    state: latest
+  tags:
+    - nginx
+
+- name: "Start nginx"
+  service:
+    name: nginx
+    state: started
+  register: nginx_install
+  tags:
+    - nginx
+
+- debug:
+    msg: "Nginx installation OK :)"
+  when: nginx_install.state == "started"
+
+...
