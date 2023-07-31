@@ -1,5 +1,6 @@
-Role Name
-=========
+# ansible-role-nginx
+Nginx installation using Ansible
+
 
 A brief description of the role goes here.
 
